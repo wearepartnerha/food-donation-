@@ -7,7 +7,7 @@ export type { KitchenStats };
 
 export const KITCHEN_STATS_QUERY_KEY = ["kitchen-stats"] as const;
 
-/** How often "live" pages re-poll the server now that there's no Supabase realtime channel. */
+/** How often "live" pages re-poll the API for fresh data. */
 export const LIVE_REFRESH_MS = 30_000;
 
 const EMPTY_STATS: KitchenStats = {
