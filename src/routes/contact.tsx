@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 
 import { AppShell, PageIntro } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import { submitContactMessage, submitVolunteerSignup } from "@/lib/kitchen.functions";
+import { submitContactMessage, submitVolunteerSignup } from "@/api/kitchen";
 import { useLanguage } from "@/lib/i18n";
 import { APP_NAME, pageTitle } from "@/lib/brand";
 import { errorMessage } from "@/lib/utils";
@@ -13,7 +13,10 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: pageTitle("Contact Us") },
-      { name: "description", content: `Get in touch with the ${APP_NAME} team or sign up for a volunteer drive.` },
+      {
+        name: "description",
+        content: `Get in touch with the ${APP_NAME} team or sign up for a volunteer drive.`,
+      },
       { property: "og:title", content: pageTitle("Contact Us") },
       { property: "og:description", content: "Reach out or join as a volunteer." },
       { property: "og:type", content: "website" },
@@ -83,7 +86,11 @@ function ContactPage() {
     <AppShell>
       <PageIntro
         eyebrow={t("contact.eyebrow")}
-        title={<>{t("contact.titleMain")} <span className="italic">{t("contact.titleEmphasis")}</span></>}
+        title={
+          <>
+            {t("contact.titleMain")} <span className="italic">{t("contact.titleEmphasis")}</span>
+          </>
+        }
         description={t("contact.description")}
       />
 
@@ -105,15 +112,29 @@ function ContactPage() {
             <form className="mt-6 space-y-6" onSubmit={submitContact}>
               <label className="block">
                 <span className="label-caps text-muted-foreground">{t("contact.name")}</span>
-                <input required name="name" className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                <input
+                  required
+                  name="name"
+                  className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                />
               </label>
               <label className="block">
                 <span className="label-caps text-muted-foreground">{t("contact.email")}</span>
-                <input required type="email" name="email" className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                />
               </label>
               <label className="block">
                 <span className="label-caps text-muted-foreground">{t("contact.message")}</span>
-                <textarea required name="message" rows={4} className="mt-2 w-full resize-none border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                <textarea
+                  required
+                  name="message"
+                  rows={4}
+                  className="mt-2 w-full resize-none border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                />
               </label>
               {contactError && <p className="text-sm text-accent">{contactError}</p>}
               <Button type="submit" size="wide" className="w-full" disabled={contactSaving}>
@@ -136,14 +157,18 @@ function ContactPage() {
 
         <div className="bg-muted/25 px-4 py-8 sm:px-8 lg:px-10">
           <h2 className="label-caps">{t("contact.volunteer.title")}</h2>
-          <p className="mt-3 text-sm leading-6 text-muted-foreground">{t("contact.volunteer.desc")}</p>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            {t("contact.volunteer.desc")}
+          </p>
           {volunteerSent ? (
             <div className="mt-6 border border-border-strong bg-card p-6">
               <div className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 <Check className="size-5" />
               </div>
               <h3 className="mt-5 font-display text-2xl">{t("contact.volunteer.list.title")}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{t("contact.volunteer.list.body")}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {t("contact.volunteer.list.body")}
+              </p>
               <Button className="mt-6" variant="outline" onClick={() => setVolunteerSent(false)}>
                 {t("contact.volunteer.again")}
               </Button>
@@ -153,26 +178,48 @@ function ContactPage() {
               <div className="grid gap-6 sm:grid-cols-2">
                 <label className="block">
                   <span className="label-caps text-muted-foreground">{t("contact.name")}</span>
-                  <input required name="name" className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                  <input
+                    required
+                    name="name"
+                    className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                  />
                 </label>
                 <label className="block">
                   <span className="label-caps text-muted-foreground">{t("contact.phone")}</span>
-                  <input name="phone" type="tel" className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                  <input
+                    name="phone"
+                    type="tel"
+                    className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                  />
                 </label>
               </div>
               <div className="grid gap-6 sm:grid-cols-2">
                 <label className="block">
                   <span className="label-caps text-muted-foreground">{t("contact.email")}</span>
-                  <input required type="email" name="email" className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                  />
                 </label>
                 <label className="block">
                   <span className="label-caps text-muted-foreground">{t("contact.city")}</span>
-                  <input name="location" className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                  <input
+                    name="location"
+                    className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                  />
                 </label>
               </div>
               <label className="block">
-                <span className="label-caps text-muted-foreground">{t("contact.availability")}</span>
-                <textarea name="message" rows={3} className="mt-2 w-full resize-none border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                <span className="label-caps text-muted-foreground">
+                  {t("contact.availability")}
+                </span>
+                <textarea
+                  name="message"
+                  rows={3}
+                  className="mt-2 w-full resize-none border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                />
               </label>
               {volunteerError && <p className="text-sm text-accent">{volunteerError}</p>}
               <Button type="submit" size="wide" className="w-full" disabled={volunteerSaving}>

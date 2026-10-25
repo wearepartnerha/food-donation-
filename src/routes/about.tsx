@@ -11,7 +11,11 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: pageTitle("About Us") },
-      { name: "description", content: "How surplus food reaches local community kitchens, food banks, and volunteer drives — and the community impact so far." },
+      {
+        name: "description",
+        content:
+          "How surplus food reaches local community kitchens, food banks, and volunteer drives — and the community impact so far.",
+      },
       { property: "og:title", content: pageTitle("About Us") },
       { property: "og:description", content: "Our mission and the community impact so far." },
       { property: "og:type", content: "website" },
@@ -32,24 +36,53 @@ function AboutPage() {
   ];
 
   const tiles = [
-    { labelKey: "about.tile.mealsToday", value: formatCount(stats.meals_cooked_today), unitKey: "about.unit.meals", icon: UtensilsCrossed },
-    { labelKey: "about.tile.childrenToday", value: formatCount(stats.children_served_today), unitKey: "about.unit.children", icon: Users },
-    { labelKey: "about.tile.centers", value: formatCount(stats.active_kitchen_centers), unitKey: "about.unit.centers", icon: Building2 },
-    { labelKey: "about.tile.mealsMonth", value: formatCount(stats.meals_cooked_this_month), unitKey: "about.unit.meals", icon: HeartHandshake },
+    {
+      labelKey: "about.tile.mealsToday",
+      value: formatCount(stats.meals_cooked_today),
+      unitKey: "about.unit.meals",
+      icon: UtensilsCrossed,
+    },
+    {
+      labelKey: "about.tile.childrenToday",
+      value: formatCount(stats.children_served_today),
+      unitKey: "about.unit.children",
+      icon: Users,
+    },
+    {
+      labelKey: "about.tile.centers",
+      value: formatCount(stats.active_kitchen_centers),
+      unitKey: "about.unit.centers",
+      icon: Building2,
+    },
+    {
+      labelKey: "about.tile.mealsMonth",
+      value: formatCount(stats.meals_cooked_this_month),
+      unitKey: "about.unit.meals",
+      icon: HeartHandshake,
+    },
   ];
 
   return (
     <AppShell>
       <PageIntro
         eyebrow={t("about.eyebrow")}
-        title={<>{t("about.titleMain")} <span className="italic">{t("about.titleEmphasis")}</span></>}
+        title={
+          <>
+            {t("about.titleMain")} <span className="italic">{t("about.titleEmphasis")}</span>
+          </>
+        }
         description={t("about.description")}
       />
 
       <section className="grid border-b border-border md:grid-cols-3">
         {steps.map(({ titleKey, bodyKey }, index) => (
-          <article key={titleKey} className={`min-w-0 p-4 sm:p-8 ${index < steps.length - 1 ? "border-b border-border md:border-b-0 md:border-r" : ""}`}>
-            <div className="flex size-9 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">{index + 1}</div>
+          <article
+            key={titleKey}
+            className={`min-w-0 p-4 sm:p-8 ${index < steps.length - 1 ? "border-b border-border md:border-b-0 md:border-r" : ""}`}
+          >
+            <div className="flex size-9 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+              {index + 1}
+            </div>
             <h2 className="mt-5 font-display text-xl">{t(titleKey)}</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{t(bodyKey)}</p>
           </article>

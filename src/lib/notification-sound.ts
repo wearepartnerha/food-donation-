@@ -24,7 +24,9 @@ export function setNotificationSoundEnabled(enabled: boolean) {
 
 function getContext(): AudioContext | null {
   if (typeof window === "undefined") return null;
-  const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  const Ctor =
+    window.AudioContext ??
+    (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
   if (!Ctor) return null;
   if (!audioCtx) audioCtx = new Ctor();
   return audioCtx;
@@ -67,7 +69,10 @@ export function playNotificationSound() {
   };
 
   if (ctx.state === "suspended") {
-    ctx.resume().then(chime).catch(() => {});
+    ctx
+      .resume()
+      .then(chime)
+      .catch(() => {});
   } else {
     chime();
   }

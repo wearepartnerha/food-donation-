@@ -34,7 +34,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "auth.signIn": "Sign in",
     "auth.signOut": "Sign out",
     // Sidebar
-    "networkImpact": "Today's impact",
+    networkImpact: "Today's impact",
     "appShell.mealsSidebar": "meals",
     "appShell.cookedToday": "Cooked today across all community kitchens.",
     "appShell.noMealsToday": "No meals logged yet today.",
@@ -43,7 +43,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "home.eyebrow": "Community food network",
     "home.titleMain": "Share surplus food,",
     "home.titleEmphasis": "feed your neighbors.",
-    "home.description": "A community platform connecting surplus food from donors with local community kitchens, food banks, and volunteers — from pantry stock to plate, tracked live.",
+    "home.description":
+      "A community platform connecting surplus food from donors with local community kitchens, food banks, and volunteers — from pantry stock to plate, tracked live.",
     "home.sponsorBtn": "Sponsor a Meal",
     "home.inventoryBtn": "Live Kitchen Inventory",
     "home.tile.mealsToday": "Meals cooked today",
@@ -55,19 +56,23 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "home.tile.centersUnit": "centers",
     "home.tile.allTime": "all time",
     "home.card.sponsor.title": "Sponsor a Meal",
-    "home.card.sponsor.desc": "₹500 sponsors 50 meals at a local community kitchen. Track your sponsorship and get an impact certificate.",
+    "home.card.sponsor.desc":
+      "₹500 sponsors 50 meals at a local community kitchen. Track your sponsorship and get an impact certificate.",
     "home.card.sponsor.cta": "Sponsor now",
     "home.card.inventory.title": "Live Kitchen Inventory",
-    "home.card.inventory.desc": "Surplus and donated stock — grains, pulses, produce, and cooking essentials — with automatic re-order alerts.",
+    "home.card.inventory.desc":
+      "Surplus and donated stock — grains, pulses, produce, and cooking essentials — with automatic re-order alerts.",
     "home.card.inventory.cta": "View inventory",
     "home.card.distribution.title": "Distribution Tracker",
-    "home.card.distribution.desc": "See every community kitchen, food bank, and drop-off point receiving food today, live on the map.",
+    "home.card.distribution.desc":
+      "See every community kitchen, food bank, and drop-off point receiving food today, live on the map.",
     "home.card.distribution.cta": "Track distribution",
     // Sponsor page
     "sponsor.eyebrow": "Sponsor a Meal",
     "sponsor.titleMain": "₹500 shares",
     "sponsor.titleEmphasis": "50 meals.",
-    "sponsor.description": "Every sponsorship helps local community kitchens turn donated and surplus ingredients into fresh meals for people who need them.",
+    "sponsor.description":
+      "Every sponsorship helps local community kitchens turn donated and surplus ingredients into fresh meals for people who need them.",
     "sponsor.chooseAmount": "Choose an amount",
     "sponsor.signInPrompt": "Sign in to sponsor a meal and track your impact.",
     "sponsor.signIn": "Sign in",
@@ -75,7 +80,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "sponsor.sponsorName": "Sponsor name",
     "sponsor.email": "Email",
     "sponsor.messageOpt": "Message (optional)",
-    "sponsor.paymentNote": "This records your sponsorship pledge. Payment is coordinated separately (bank transfer / UPI) — no online payment is processed on this page.",
+    "sponsor.paymentNote":
+      "This records your sponsorship pledge. Payment is coordinated separately (bank transfer / UPI) — no online payment is processed on this page.",
     "sponsor.submitBtn": "Sponsor a meal",
     "sponsor.saving": "Recording…",
     "sponsor.mySponsorships": "My sponsorships",
@@ -88,7 +94,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "inventory.eyebrow": "Live Kitchen Inventory",
     "inventory.titleMain": "Food stock,",
     "inventory.titleEmphasis": "tracked daily.",
-    "inventory.description": "Grains, pulses, produce, and cooking essentials on hand across community kitchens, updated as stock moves, with automatic re-order alerts.",
+    "inventory.description":
+      "Grains, pulses, produce, and cooking essentials on hand across community kitchens, updated as stock moves, with automatic re-order alerts.",
     "inventory.addItem": "Add item",
     "inventory.cancel": "Cancel",
     "inventory.reorderAlerts": "Re-order alerts",
@@ -105,7 +112,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "distribution.eyebrow": "Live Distribution Tracker",
     "distribution.titleMain": "Meals, delivered",
     "distribution.titleEmphasis": "where they're needed.",
-    "distribution.description": "Community kitchens, food banks, and drop-off points receiving surplus food and fresh meals, tracked live.",
+    "distribution.description":
+      "Community kitchens, food banks, and drop-off points receiving surplus food and fresh meals, tracked live.",
     "distribution.addCenter": "Add center",
     "distribution.logDelivery": "Log a delivery",
     "distribution.cancel": "Cancel",
@@ -128,7 +136,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "distribution.logDeliveryBtn": "Log delivery",
     // Partner registration
     "registration.title": "Become a distribution partner",
-    "registration.intro": "Community kitchens, food banks, shelters, and volunteer groups can register here to become a verified distribution point. An admin reviews and approves each registration.",
+    "registration.intro":
+      "Community kitchens, food banks, shelters, and volunteer groups can register here to become a verified distribution point. An admin reviews and approves each registration.",
     "registration.edit": "Edit registration",
     "registration.cancel": "Cancel",
     "registration.signInPrompt": "Sign in to register your organization.",
@@ -155,15 +164,19 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "about.eyebrow": "About / Our mission",
     "about.titleMain": "Less waste,",
     "about.titleEmphasis": "more meals shared.",
-    "about.description": "Food Waste Connect bridges surplus food and the communities that need it — linking donors, local community kitchens, and volunteers so good food gets eaten, not thrown away.",
+    "about.description":
+      "Food Waste Connect bridges surplus food and the communities that need it — linking donors, local community kitchens, and volunteers so good food gets eaten, not thrown away.",
     "about.impactSoFar": "Impact so far",
     "about.loadingImpact": "Loading impact…",
     "about.step1.title": "Surplus food is donated",
-    "about.step1.body": "Donors, restaurants, and grocers contribute surplus grains, pulses, produce, and essentials, tracked into shared inventory every day.",
+    "about.step1.body":
+      "Donors, restaurants, and grocers contribute surplus grains, pulses, produce, and essentials, tracked into shared inventory every day.",
     "about.step2.title": "Community kitchens cook fresh",
-    "about.step2.body": "Local community kitchens and volunteer drives turn donated ingredients into fresh meals for people in their neighborhood.",
+    "about.step2.body":
+      "Local community kitchens and volunteer drives turn donated ingredients into fresh meals for people in their neighborhood.",
     "about.step3.title": "Meals reach every neighborhood",
-    "about.step3.body": "Distribution is tracked live — meals cooked, people served, and active kitchens, visible to everyone.",
+    "about.step3.body":
+      "Distribution is tracked live — meals cooked, people served, and active kitchens, visible to everyone.",
     "about.tile.mealsToday": "Meals cooked today",
     "about.tile.childrenToday": "People served today",
     "about.tile.centers": "Active community kitchens",
@@ -173,7 +186,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "about.unit.centers": "centers",
     // Profile page
     "profile.eyebrow": "Profile / Community member",
-    "profile.description": "Manage the contact and organization information on your community account.",
+    "profile.description":
+      "Manage the contact and organization information on your community account.",
     "profile.editBtn": "Edit profile",
     "profile.defaultOrg": "Your organization",
     "profile.orgSubtext": "Community food distribution and neighborhood support.",
@@ -197,10 +211,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "contact.eyebrow": "Contact / Get in touch",
     "contact.titleMain": "We would love",
     "contact.titleEmphasis": "to hear from you.",
-    "contact.description": "Questions about the platform, a partnership idea, or ready to join a volunteer drive — send us a message below.",
+    "contact.description":
+      "Questions about the platform, a partnership idea, or ready to join a volunteer drive — send us a message below.",
     "contact.us": "Contact us",
     "contact.sent.title": "Message received",
-    "contact.sent.body": "Thanks for reaching out — your message has been saved and our team will follow up.",
+    "contact.sent.body":
+      "Thanks for reaching out — your message has been saved and our team will follow up.",
     "contact.sent.again": "Send another message",
     "contact.name": "Name",
     "contact.email": "Email",
@@ -208,11 +224,14 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "contact.sending": "Sending…",
     "contact.send": "Send message",
     "contact.info.form": "Messages go straight to the team through this form.",
-    "contact.info.serving": "Supporting local community kitchens, food banks, and volunteer drives.",
+    "contact.info.serving":
+      "Supporting local community kitchens, food banks, and volunteer drives.",
     "contact.volunteer.title": "Volunteer sign-up",
-    "contact.volunteer.desc": "Tell us about yourself and a volunteer coordinator will connect with you.",
+    "contact.volunteer.desc":
+      "Tell us about yourself and a volunteer coordinator will connect with you.",
     "contact.volunteer.list.title": "You're on the list",
-    "contact.volunteer.list.body": "Your volunteer sign-up has been saved. We will reach out with next steps.",
+    "contact.volunteer.list.body":
+      "Your volunteer sign-up has been saved. We will reach out with next steps.",
     "contact.volunteer.again": "Sign up someone else",
     "contact.phone": "Phone",
     "contact.city": "City / area",
@@ -250,7 +269,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "auth.signIn": "साइन इन करें",
     "auth.signOut": "साइन आउट करें",
     // Sidebar
-    "networkImpact": "आज का प्रभाव",
+    networkImpact: "आज का प्रभाव",
     "appShell.mealsSidebar": "भोजन",
     "appShell.cookedToday": "आज सभी सामुदायिक रसोई में पकाया गया।",
     "appShell.noMealsToday": "आज अभी तक कोई भोजन दर्ज नहीं।",
@@ -259,7 +278,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "home.eyebrow": "सामुदायिक खाद्य नेटवर्क",
     "home.titleMain": "बचा हुआ भोजन साझा करें,",
     "home.titleEmphasis": "पड़ोसियों का पेट भरें।",
-    "home.description": "एक सामुदायिक मंच जो दाताओं के बचे हुए भोजन को स्थानीय सामुदायिक रसोई, फ़ूड बैंक और स्वयंसेवकों से जोड़ता है — भंडार से थाली तक, लाइव ट्रैक किया गया।",
+    "home.description":
+      "एक सामुदायिक मंच जो दाताओं के बचे हुए भोजन को स्थानीय सामुदायिक रसोई, फ़ूड बैंक और स्वयंसेवकों से जोड़ता है — भंडार से थाली तक, लाइव ट्रैक किया गया।",
     "home.sponsorBtn": "भोजन प्रायोजित करें",
     "home.inventoryBtn": "रसोई भंडार",
     "home.tile.mealsToday": "आज पका भोजन",
@@ -271,19 +291,23 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "home.tile.centersUnit": "केंद्र",
     "home.tile.allTime": "अब तक",
     "home.card.sponsor.title": "भोजन प्रायोजित करें",
-    "home.card.sponsor.desc": "₹500 में स्थानीय सामुदायिक रसोई में 50 भोजन प्रायोजित करें। अपना प्रायोजन ट्रैक करें और एक प्रभाव प्रमाण पत्र पाएं।",
+    "home.card.sponsor.desc":
+      "₹500 में स्थानीय सामुदायिक रसोई में 50 भोजन प्रायोजित करें। अपना प्रायोजन ट्रैक करें और एक प्रभाव प्रमाण पत्र पाएं।",
     "home.card.sponsor.cta": "अभी प्रायोजित करें",
     "home.card.inventory.title": "रसोई भंडार",
-    "home.card.inventory.desc": "बचा हुआ और दान किया गया स्टॉक — अनाज, दाल, उपज और खाना पकाने की ज़रूरी चीज़ें — स्वचालित पुनः-आदेश सूचनाओं के साथ।",
+    "home.card.inventory.desc":
+      "बचा हुआ और दान किया गया स्टॉक — अनाज, दाल, उपज और खाना पकाने की ज़रूरी चीज़ें — स्वचालित पुनः-आदेश सूचनाओं के साथ।",
     "home.card.inventory.cta": "भंडार देखें",
     "home.card.distribution.title": "वितरण ट्रैकर",
-    "home.card.distribution.desc": "आज भोजन प्राप्त करने वाली हर सामुदायिक रसोई, फ़ूड बैंक और वितरण स्थल को मानचित्र पर लाइव देखें।",
+    "home.card.distribution.desc":
+      "आज भोजन प्राप्त करने वाली हर सामुदायिक रसोई, फ़ूड बैंक और वितरण स्थल को मानचित्र पर लाइव देखें।",
     "home.card.distribution.cta": "वितरण ट्रैक करें",
     // Sponsor page
     "sponsor.eyebrow": "भोजन प्रायोजित करें",
     "sponsor.titleMain": "₹500 में",
     "sponsor.titleEmphasis": "50 भोजन साझा करें।",
-    "sponsor.description": "हर प्रायोजन स्थानीय सामुदायिक रसोई को दान और बचे हुए सामान से ज़रूरतमंद लोगों के लिए ताजा भोजन बनाने में मदद करता है।",
+    "sponsor.description":
+      "हर प्रायोजन स्थानीय सामुदायिक रसोई को दान और बचे हुए सामान से ज़रूरतमंद लोगों के लिए ताजा भोजन बनाने में मदद करता है।",
     "sponsor.chooseAmount": "राशि चुनें",
     "sponsor.signInPrompt": "भोजन प्रायोजित करने और अपना प्रभाव ट्रैक करने के लिए साइन इन करें।",
     "sponsor.signIn": "साइन इन करें",
@@ -291,11 +315,13 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "sponsor.sponsorName": "प्रायोजक नाम",
     "sponsor.email": "ईमेल",
     "sponsor.messageOpt": "संदेश (वैकल्पिक)",
-    "sponsor.paymentNote": "यह आपकी प्रायोजन प्रतिज्ञा दर्ज करता है। भुगतान अलग से समन्वित होता है (बैंक ट्रांसफर / UPI) — इस पृष्ठ पर कोई ऑनलाइन भुगतान नहीं होता।",
+    "sponsor.paymentNote":
+      "यह आपकी प्रायोजन प्रतिज्ञा दर्ज करता है। भुगतान अलग से समन्वित होता है (बैंक ट्रांसफर / UPI) — इस पृष्ठ पर कोई ऑनलाइन भुगतान नहीं होता।",
     "sponsor.submitBtn": "भोजन प्रायोजित करें",
     "sponsor.saving": "दर्ज हो रहा है…",
     "sponsor.mySponsorships": "मेरे प्रायोजन",
-    "sponsor.signInHistory": "अपना प्रायोजन इतिहास और प्रभाव प्रमाण पत्र देखने के लिए साइन इन करें।",
+    "sponsor.signInHistory":
+      "अपना प्रायोजन इतिहास और प्रभाव प्रमाण पत्र देखने के लिए साइन इन करें।",
     "sponsor.loading": "लोड हो रहा है…",
     "sponsor.noSponsorships": "अभी तक कोई प्रायोजन नहीं — हर भोजन मायने रखता है।",
     "sponsor.recorded": "आपका प्रायोजन दर्ज किया गया।",
@@ -304,7 +330,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "inventory.eyebrow": "लाइव रसोई भंडार",
     "inventory.titleMain": "खाद्य भंडार,",
     "inventory.titleEmphasis": "रोज़ ट्रैक किया गया।",
-    "inventory.description": "सामुदायिक रसोई में अनाज, दाल, उपज और खाना पकाने की ज़रूरी चीज़ें, स्टॉक बदलते ही अपडेट होती हैं, स्वचालित पुनः-आदेश अलर्ट के साथ।",
+    "inventory.description":
+      "सामुदायिक रसोई में अनाज, दाल, उपज और खाना पकाने की ज़रूरी चीज़ें, स्टॉक बदलते ही अपडेट होती हैं, स्वचालित पुनः-आदेश अलर्ट के साथ।",
     "inventory.addItem": "आइटम जोड़ें",
     "inventory.cancel": "रद्द करें",
     "inventory.reorderAlerts": "पुनः-आदेश अलर्ट",
@@ -321,7 +348,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "distribution.eyebrow": "लाइव वितरण ट्रैकर",
     "distribution.titleMain": "भोजन, पहुँचाया गया",
     "distribution.titleEmphasis": "जहाँ ज़रूरत है।",
-    "distribution.description": "बचा हुआ भोजन और ताजा पका भोजन प्राप्त करने वाली सामुदायिक रसोई, फ़ूड बैंक और वितरण स्थल, लाइव ट्रैक किए गए।",
+    "distribution.description":
+      "बचा हुआ भोजन और ताजा पका भोजन प्राप्त करने वाली सामुदायिक रसोई, फ़ूड बैंक और वितरण स्थल, लाइव ट्रैक किए गए।",
     "distribution.addCenter": "केंद्र जोड़ें",
     "distribution.logDelivery": "डिलीवरी दर्ज करें",
     "distribution.cancel": "रद्द करें",
@@ -344,7 +372,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "distribution.logDeliveryBtn": "डिलीवरी दर्ज करें",
     // Partner registration
     "registration.title": "वितरण साझेदार बनें",
-    "registration.intro": "सामुदायिक रसोई, फ़ूड बैंक, आश्रय स्थल और स्वयंसेवी समूह सत्यापित वितरण स्थल बनने के लिए यहाँ पंजीकरण कर सकते हैं। एक एडमिन हर पंजीकरण की समीक्षा और स्वीकृति करता है।",
+    "registration.intro":
+      "सामुदायिक रसोई, फ़ूड बैंक, आश्रय स्थल और स्वयंसेवी समूह सत्यापित वितरण स्थल बनने के लिए यहाँ पंजीकरण कर सकते हैं। एक एडमिन हर पंजीकरण की समीक्षा और स्वीकृति करता है।",
     "registration.edit": "पंजीकरण संपादित करें",
     "registration.cancel": "रद्द करें",
     "registration.signInPrompt": "अपने संगठन का पंजीकरण करने के लिए साइन इन करें।",
@@ -371,15 +400,19 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "about.eyebrow": "हमारे बारे में / हमारा मिशन",
     "about.titleMain": "कम बर्बादी,",
     "about.titleEmphasis": "ज़्यादा साझा भोजन।",
-    "about.description": "फ़ूड वेस्ट कनेक्ट बचे हुए भोजन को ज़रूरतमंद समुदायों से जोड़ता है — दाताओं, स्थानीय सामुदायिक रसोई और स्वयंसेवकों को जोड़कर, ताकि अच्छा भोजन फेंका नहीं, खाया जाए।",
+    "about.description":
+      "फ़ूड वेस्ट कनेक्ट बचे हुए भोजन को ज़रूरतमंद समुदायों से जोड़ता है — दाताओं, स्थानीय सामुदायिक रसोई और स्वयंसेवकों को जोड़कर, ताकि अच्छा भोजन फेंका नहीं, खाया जाए।",
     "about.impactSoFar": "अब तक का प्रभाव",
     "about.loadingImpact": "प्रभाव लोड हो रहा है…",
     "about.step1.title": "बचा हुआ भोजन दान होता है",
-    "about.step1.body": "दाता, रेस्तरां और किराना दुकानें बचा हुआ अनाज, दाल, उपज और ज़रूरी सामान देते हैं, जो हर दिन साझा भंडार में ट्रैक होता है।",
+    "about.step1.body":
+      "दाता, रेस्तरां और किराना दुकानें बचा हुआ अनाज, दाल, उपज और ज़रूरी सामान देते हैं, जो हर दिन साझा भंडार में ट्रैक होता है।",
     "about.step2.title": "सामुदायिक रसोई ताजा पकाती है",
-    "about.step2.body": "स्थानीय सामुदायिक रसोई और स्वयंसेवी अभियान दान की गई सामग्री से अपने पड़ोस के लोगों के लिए ताजा भोजन बनाते हैं।",
+    "about.step2.body":
+      "स्थानीय सामुदायिक रसोई और स्वयंसेवी अभियान दान की गई सामग्री से अपने पड़ोस के लोगों के लिए ताजा भोजन बनाते हैं।",
     "about.step3.title": "भोजन हर मोहल्ले तक पहुँचता है",
-    "about.step3.body": "वितरण लाइव ट्रैक होता है — पका भोजन, सेवित लोग, और सक्रिय रसोई, सभी के लिए दृश्यमान।",
+    "about.step3.body":
+      "वितरण लाइव ट्रैक होता है — पका भोजन, सेवित लोग, और सक्रिय रसोई, सभी के लिए दृश्यमान।",
     "about.tile.mealsToday": "आज पका भोजन",
     "about.tile.childrenToday": "आज सेवित लोग",
     "about.tile.centers": "सक्रिय सामुदायिक रसोई",
@@ -413,10 +446,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "contact.eyebrow": "संपर्क / हमसे मिलें",
     "contact.titleMain": "हम सुनना",
     "contact.titleEmphasis": "पसंद करेंगे।",
-    "contact.description": "मंच के बारे में प्रश्न, साझेदारी का विचार, या स्वयंसेवी अभियान से जुड़ने के लिए तैयार — नीचे संदेश भेजें।",
+    "contact.description":
+      "मंच के बारे में प्रश्न, साझेदारी का विचार, या स्वयंसेवी अभियान से जुड़ने के लिए तैयार — नीचे संदेश भेजें।",
     "contact.us": "हमसे संपर्क करें",
     "contact.sent.title": "संदेश मिला",
-    "contact.sent.body": "संपर्क करने के लिए धन्यवाद — आपका संदेश सहेजा गया है और हमारी टीम अनुसरण करेगी।",
+    "contact.sent.body":
+      "संपर्क करने के लिए धन्यवाद — आपका संदेश सहेजा गया है और हमारी टीम अनुसरण करेगी।",
     "contact.sent.again": "एक और संदेश भेजें",
     "contact.name": "नाम",
     "contact.email": "ईमेल",
@@ -428,14 +463,16 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     "contact.volunteer.title": "स्वयंसेवक साइन-अप",
     "contact.volunteer.desc": "अपने बारे में बताएं और एक स्वयंसेवक समन्वयक आपसे जुड़ेगा।",
     "contact.volunteer.list.title": "आप सूची में हैं",
-    "contact.volunteer.list.body": "आपका स्वयंसेवक साइन-अप सहेजा गया है। हम अगले चरणों के साथ संपर्क करेंगे।",
+    "contact.volunteer.list.body":
+      "आपका स्वयंसेवक साइन-अप सहेजा गया है। हम अगले चरणों के साथ संपर्क करेंगे।",
     "contact.volunteer.again": "किसी और को साइन अप करें",
     "contact.phone": "फ़ोन",
     "contact.city": "शहर / क्षेत्र",
     "contact.availability": "उपलब्धता / नोट्स (वैकल्पिक)",
     "contact.submitVolunteer": "स्वयंसेवा के लिए साइन अप करें",
     "contact.submitting": "जमा हो रहा है…",
-    "contact.coordinator": "एक समन्वयक आपके द्वारा प्रदान किए गए विवरण का उपयोग करके आपसे संपर्क करेगा।",
+    "contact.coordinator":
+      "एक समन्वयक आपके द्वारा प्रदान किए गए विवरण का उपयोग करके आपसे संपर्क करेगा।",
   },
 };
 

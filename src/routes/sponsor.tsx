@@ -6,9 +6,9 @@ import { AppShell, PageIntro } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { LIVE_REFRESH_MS, useKitchenStats } from "@/hooks/use-kitchen";
 import { useProfile } from "@/hooks/use-profile";
-import type { Sponsorship } from "@/integrations/mongodb/types";
+import type { Sponsorship } from "@/api/types";
 import { formatInr, mealsForAmount, SPONSOR_QUICK_AMOUNTS } from "@/lib/kitchen";
-import { listMySponsorships, recordSponsorship } from "@/lib/kitchen.functions";
+import { listMySponsorships, recordSponsorship } from "@/api/kitchen";
 import { useLanguage } from "@/lib/i18n";
 import { playNotificationSound } from "@/lib/notification-sound";
 import { pageTitle } from "@/lib/brand";
@@ -18,9 +18,16 @@ export const Route = createFileRoute("/sponsor")({
   head: () => ({
     meta: [
       { title: pageTitle("Sponsor a Meal") },
-      { name: "description", content: "Sponsor fresh meals cooked by local community kitchens from donated and surplus food. ₹500 sponsors 50 meals." },
+      {
+        name: "description",
+        content:
+          "Sponsor fresh meals cooked by local community kitchens from donated and surplus food. ₹500 sponsors 50 meals.",
+      },
       { property: "og:title", content: pageTitle("Sponsor a Meal") },
-      { property: "og:description", content: "₹500 shares 50 meals in your community. Sponsor a meal today." },
+      {
+        property: "og:description",
+        content: "₹500 shares 50 meals in your community. Sponsor a meal today.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -29,7 +36,13 @@ export const Route = createFileRoute("/sponsor")({
 });
 
 function formatMoment(iso: string) {
-  return new Date(iso).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
+  return new Date(iso).toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 function SponsorPage() {
@@ -67,7 +80,7 @@ function SponsorPage() {
     if (!user) return;
     const timer = setInterval(() => void load(), LIVE_REFRESH_MS);
     return () => clearInterval(timer);
-  }, [user?.id, load]);
+  }, [user, load]);
 
   async function submitPledge(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -81,8 +94,11 @@ function SponsorPage() {
     const form = new FormData(event.currentTarget);
     const insertError = await recordSponsorship({
       data: {
-        sponsor_name: String(form.get("sponsor_name") ?? profile?.full_name ?? "").trim() || "Anonymous sponsor",
-        sponsor_email: String(form.get("sponsor_email") ?? profile?.email ?? user.email ?? "").trim() || null,
+        sponsor_name:
+          String(form.get("sponsor_name") ?? profile?.full_name ?? "").trim() ||
+          "Anonymous sponsor",
+        sponsor_email:
+          String(form.get("sponsor_email") ?? profile?.email ?? user.email ?? "").trim() || null,
         amount_inr: effectiveAmount,
         meals_sponsored: meals,
         message: message.trim() || null,
@@ -105,7 +121,11 @@ function SponsorPage() {
     <AppShell>
       <PageIntro
         eyebrow={t("sponsor.eyebrow")}
-        title={<>{t("sponsor.titleMain")} <span className="italic">{t("sponsor.titleEmphasis")}</span></>}
+        title={
+          <>
+            {t("sponsor.titleMain")} <span className="italic">{t("sponsor.titleEmphasis")}</span>
+          </>
+        }
         description={t("sponsor.description")}
       />
 
@@ -115,7 +135,9 @@ function SponsorPage() {
           {!user ? (
             <div className="mt-6 border border-border-strong bg-card p-6">
               <p className="text-sm text-muted-foreground">{t("sponsor.signInPrompt")}</p>
-              <Button asChild className="mt-4"><Link to="/auth">{t("sponsor.signIn")}</Link></Button>
+              <Button asChild className="mt-4">
+                <Link to="/auth">{t("sponsor.signIn")}</Link>
+              </Button>
             </div>
           ) : (
             <form onSubmit={submitPledge} className="mt-6 space-y-6">
@@ -135,7 +157,9 @@ function SponsorPage() {
                 ))}
               </div>
               <label className="block">
-                <span className="label-caps text-muted-foreground">{t("sponsor.customAmount")}</span>
+                <span className="label-caps text-muted-foreground">
+                  {t("sponsor.customAmount")}
+                </span>
                 <input
                   type="number"
                   min="10"
@@ -150,26 +174,48 @@ function SponsorPage() {
               <div className="flex items-center gap-3 border border-border-strong bg-muted/25 p-4">
                 <UtensilsCrossed className="size-5 shrink-0 text-accent" />
                 <p className="text-sm">
-                  <span className="font-display text-2xl">{meals}</span> {t("home.tile.mealsUnit")}{meals === 1 ? "" : ""} {t("sponsor.submitBtn")} {formatInr(effectiveAmount)}
+                  <span className="font-display text-2xl">{meals}</span> {t("home.tile.mealsUnit")}
+                  {meals === 1 ? "" : ""} {t("sponsor.submitBtn")} {formatInr(effectiveAmount)}
                 </p>
               </div>
 
               <label className="block">
                 <span className="label-caps text-muted-foreground">{t("sponsor.sponsorName")}</span>
-                <input name="sponsor_name" defaultValue={profile?.full_name ?? ""} required className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                <input
+                  name="sponsor_name"
+                  defaultValue={profile?.full_name ?? ""}
+                  required
+                  className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                />
               </label>
               <label className="block">
                 <span className="label-caps text-muted-foreground">{t("sponsor.email")}</span>
-                <input name="sponsor_email" type="email" defaultValue={profile?.email ?? user.email ?? ""} className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+                <input
+                  name="sponsor_email"
+                  type="email"
+                  defaultValue={profile?.email ?? user.email ?? ""}
+                  className="mt-2 h-12 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+                />
               </label>
               <label className="block">
                 <span className="label-caps text-muted-foreground">{t("sponsor.messageOpt")}</span>
-                <textarea value={message} onChange={(event) => setMessage(event.target.value)} rows={3} placeholder="In memory of… / On behalf of…" className="mt-2 w-full resize-none border-b border-input bg-transparent text-sm outline-none placeholder:text-muted-foreground/60 focus:border-foreground" />
+                <textarea
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  rows={3}
+                  placeholder="In memory of… / On behalf of…"
+                  className="mt-2 w-full resize-none border-b border-input bg-transparent text-sm outline-none placeholder:text-muted-foreground/60 focus:border-foreground"
+                />
               </label>
 
               {error && <p className="text-sm text-accent">{error}</p>}
               <p className="text-xs text-muted-foreground">{t("sponsor.paymentNote")}</p>
-              <Button type="submit" size="wide" className="w-full" disabled={saving || effectiveAmount <= 0}>
+              <Button
+                type="submit"
+                size="wide"
+                className="w-full"
+                disabled={saving || effectiveAmount <= 0}
+              >
                 {saving ? t("sponsor.saving") : t("sponsor.submitBtn")}
               </Button>
             </form>
@@ -198,9 +244,16 @@ function SponsorPage() {
                     <p className="label-caps">{t("sponsor.certTitle")}</p>
                   </div>
                   <p className="mt-4 font-display text-2xl italic">{item.sponsor_name}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">sponsored {item.meals_sponsored} meal{item.meals_sponsored === 1 ? "" : "s"} ({formatInr(item.amount_inr)}) through local community kitchens.</p>
-                  {item.message && <p className="mt-3 text-sm italic text-muted-foreground">"{item.message}"</p>}
-                  <p className="mt-4 text-xs text-muted-foreground">{formatMoment(item.created_at)}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    sponsored {item.meals_sponsored} meal{item.meals_sponsored === 1 ? "" : "s"} (
+                    {formatInr(item.amount_inr)}) through local community kitchens.
+                  </p>
+                  {item.message && (
+                    <p className="mt-3 text-sm italic text-muted-foreground">"{item.message}"</p>
+                  )}
+                  <p className="mt-4 text-xs text-muted-foreground">
+                    {formatMoment(item.created_at)}
+                  </p>
                 </article>
               ))}
             </div>

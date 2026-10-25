@@ -13,7 +13,13 @@ export type MapPoint = {
   kind: "ngo" | "center";
 };
 
-function FitToPoints({ center, points }: { center: { lat: number; lon: number } | null; points: MapPoint[] }) {
+function FitToPoints({
+  center,
+  points,
+}: {
+  center: { lat: number; lon: number } | null;
+  points: MapPoint[];
+}) {
   const map = useMap();
 
   useEffect(() => {
@@ -26,7 +32,9 @@ function FitToPoints({ center, points }: { center: { lat: number; lon: number } 
       return;
     }
     if (points.length > 0) {
-      const bounds = L.latLngBounds(points.map((point) => [point.lat, point.lon] as [number, number]));
+      const bounds = L.latLngBounds(
+        points.map((point) => [point.lat, point.lon] as [number, number]),
+      );
       map.fitBounds(bounds.pad(0.25), { maxZoom: 13 });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,7 +43,13 @@ function FitToPoints({ center, points }: { center: { lat: number; lon: number } 
   return null;
 }
 
-export function MapPanel({ center, points }: { center: { lat: number; lon: number } | null; points: MapPoint[] }) {
+export function MapPanel({
+  center,
+  points,
+}: {
+  center: { lat: number; lon: number } | null;
+  points: MapPoint[];
+}) {
   const initialCenter: [number, number] = center
     ? [center.lat, center.lon]
     : points.length > 0
@@ -56,7 +70,11 @@ export function MapPanel({ center, points }: { center: { lat: number; lon: numbe
       />
       <FitToPoints center={center} points={points} />
       {center && (
-        <CircleMarker center={[center.lat, center.lon]} radius={9} pathOptions={{ color: "#2563eb", fillColor: "#3b82f6", fillOpacity: 0.9, weight: 2 }}>
+        <CircleMarker
+          center={[center.lat, center.lon]}
+          radius={9}
+          pathOptions={{ color: "#2563eb", fillColor: "#3b82f6", fillOpacity: 0.9, weight: 2 }}
+        >
           <Popup>You are here</Popup>
         </CircleMarker>
       )}

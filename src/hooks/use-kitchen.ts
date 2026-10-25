@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
-import { getKitchenStats, type KitchenStats } from "@/lib/kitchen.functions";
+import { getKitchenStats, type KitchenStats } from "@/api/kitchen";
 
 export type { KitchenStats };
 

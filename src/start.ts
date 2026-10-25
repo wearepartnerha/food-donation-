@@ -24,8 +24,8 @@ const csrfMiddleware = createCsrfMiddleware({
   filter: (ctx) => ctx.handlerType === "serverFn",
 });
 
-// Server functions authenticate from the httpOnly session cookie (src/lib/auth/session.server.ts),
-// which the browser sends automatically — no per-request token middleware is needed.
+// All data and auth go through the separately deployed API (food-connect-be, via
+// src/api/client.ts), which authenticates with a bearer token — not through server functions.
 export const startInstance = createStart(() => ({
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));

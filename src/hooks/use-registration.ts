@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-import type { NgoRegistration } from "@/integrations/mongodb/types";
-import { getMyRegistration, saveMyRegistration } from "@/lib/account.functions";
+import type { NgoRegistration } from "@/api/types";
+import { getMyRegistration, saveMyRegistration } from "@/api/account";
 import { errorMessage } from "@/lib/utils";
 
 export type { NgoRegistration };

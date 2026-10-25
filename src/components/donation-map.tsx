@@ -13,7 +13,13 @@ type MapModule = typeof import("./donation-map.client");
 const loadMapModule = createClientOnlyFn(() => import("./donation-map.client"));
 
 /** Loads the real map only after the component has mounted in the browser. */
-export function DonationMap({ center, points }: { center: { lat: number; lon: number } | null; points: MapPoint[] }) {
+export function DonationMap({
+  center,
+  points,
+}: {
+  center: { lat: number; lon: number } | null;
+  points: MapPoint[];
+}) {
   const [mod, setMod] = useState<MapModule | null>(null);
 
   useEffect(() => {

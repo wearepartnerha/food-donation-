@@ -1,5 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Building2, MapPin, PackageCheck, Plus, ShieldCheck, UtensilsCrossed, Users } from "lucide-react";
+import {
+  Building2,
+  MapPin,
+  PackageCheck,
+  Plus,
+  ShieldCheck,
+  UtensilsCrossed,
+  Users,
+} from "lucide-react";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 
 import { AppShell, PageIntro } from "@/components/app-shell";
@@ -10,8 +18,8 @@ import { LIVE_REFRESH_MS, useKitchenStats } from "@/hooks/use-kitchen";
 import { useProfile } from "@/hooks/use-profile";
 import { useNgoRegistration } from "@/hooks/use-registration";
 import { formatCount } from "@/hooks/use-stats";
-import type { DistributionCenter as Center } from "@/integrations/mongodb/types";
-import { addDistributionCenter, listDistributionCenters, logMeals } from "@/lib/kitchen.functions";
+import type { DistributionCenter as Center } from "@/api/types";
+import { addDistributionCenter, listDistributionCenters, logMeals } from "@/api/kitchen";
 import { useLanguage } from "@/lib/i18n";
 import { pageTitle } from "@/lib/brand";
 import { errorMessage } from "@/lib/utils";
@@ -20,9 +28,16 @@ export const Route = createFileRoute("/distribution")({
   head: () => ({
     meta: [
       { title: pageTitle("Live Distribution Tracker") },
-      { name: "description", content: "Live map of community kitchens, food banks, and drop-off points receiving surplus food and fresh meals." },
+      {
+        name: "description",
+        content:
+          "Live map of community kitchens, food banks, and drop-off points receiving surplus food and fresh meals.",
+      },
       { property: "og:title", content: pageTitle("Live Distribution Tracker") },
-      { property: "og:description", content: "Meals cooked today, people served, and active community kitchens." },
+      {
+        property: "og:description",
+        content: "Meals cooked today, people served, and active community kitchens.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -35,7 +50,13 @@ function DistributionPage() {
   const { isAdmin } = useIsAdmin(user?.id);
   const { stats, reload: reloadStats } = useKitchenStats();
   const { t } = useLanguage();
-  const { registration, loading: loadingRegistration, saving: savingRegistration, error: registrationError, save: saveRegistration } = useNgoRegistration(user?.id);
+  const {
+    registration,
+    loading: loadingRegistration,
+    saving: savingRegistration,
+    error: registrationError,
+    save: saveRegistration,
+  } = useNgoRegistration(user?.id);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [centers, setCenters] = useState<Center[]>([]);
   const [loading, setLoading] = useState(true);
@@ -97,7 +118,8 @@ function DistributionPage() {
     const insertError = await addDistributionCenter({
       data: {
         name: String(form.get("name") ?? "").trim(),
-        center_type: String(form.get("center_type") ?? "Community kitchen").trim() || "Community kitchen",
+        center_type:
+          String(form.get("center_type") ?? "Community kitchen").trim() || "Community kitchen",
         address: String(form.get("address") ?? "").trim() || null,
         latitude: lat ? Number(lat) : null,
         longitude: lon ? Number(lon) : null,
@@ -163,16 +185,33 @@ function DistributionPage() {
     }));
 
   const tiles = [
-    { labelKey: "distribution.tile.meals", value: formatCount(stats.meals_cooked_today), icon: UtensilsCrossed },
-    { labelKey: "distribution.tile.children", value: formatCount(stats.children_served_today), icon: Users },
-    { labelKey: "distribution.tile.centers", value: formatCount(stats.active_kitchen_centers), icon: Building2 },
+    {
+      labelKey: "distribution.tile.meals",
+      value: formatCount(stats.meals_cooked_today),
+      icon: UtensilsCrossed,
+    },
+    {
+      labelKey: "distribution.tile.children",
+      value: formatCount(stats.children_served_today),
+      icon: Users,
+    },
+    {
+      labelKey: "distribution.tile.centers",
+      value: formatCount(stats.active_kitchen_centers),
+      icon: Building2,
+    },
   ];
 
   return (
     <AppShell>
       <PageIntro
         eyebrow={t("distribution.eyebrow")}
-        title={<>{t("distribution.titleMain")} <span className="italic">{t("distribution.titleEmphasis")}</span></>}
+        title={
+          <>
+            {t("distribution.titleMain")}{" "}
+            <span className="italic">{t("distribution.titleEmphasis")}</span>
+          </>
+        }
         description={t("distribution.description")}
         action={
           isAdmin ? (
@@ -181,7 +220,11 @@ function DistributionPage() {
                 <Plus className="size-4" />
                 {showAddCenter ? t("distribution.cancel") : t("distribution.addCenter")}
               </Button>
-              <Button size="wide" onClick={() => setShowLogMeal((v) => !v)} disabled={centers.length === 0}>
+              <Button
+                size="wide"
+                onClick={() => setShowLogMeal((v) => !v)}
+                disabled={centers.length === 0}
+              >
                 <PackageCheck className="size-4" />
                 {showLogMeal ? t("distribution.cancel") : t("distribution.logDelivery")}
               </Button>
@@ -192,7 +235,10 @@ function DistributionPage() {
 
       <section className="grid grid-cols-1 border-b border-border sm:grid-cols-3">
         {tiles.map(({ labelKey, value, icon: Icon }, index) => (
-          <article key={labelKey} className={`min-w-0 p-4 sm:p-7 ${index < 2 ? "border-b border-border sm:border-b-0 sm:border-r" : ""}`}>
+          <article
+            key={labelKey}
+            className={`min-w-0 p-4 sm:p-7 ${index < 2 ? "border-b border-border sm:border-b-0 sm:border-r" : ""}`}
+          >
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
               <p className="label-caps truncate text-muted-foreground">{t(labelKey)}</p>
               <Icon className="size-4 shrink-0 text-accent" />
@@ -207,31 +253,61 @@ function DistributionPage() {
           <form onSubmit={addCenter} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <label className="block">
               <span className="label-caps text-muted-foreground">Center name</span>
-              <input name="name" required placeholder="e.g. Riverside Community Kitchen" className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="name"
+                required
+                placeholder="e.g. Riverside Community Kitchen"
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <label className="block">
               <span className="label-caps text-muted-foreground">Type</span>
-              <input name="center_type" defaultValue="Community kitchen" className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="center_type"
+                defaultValue="Community kitchen"
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <label className="block">
               <span className="label-caps text-muted-foreground">Daily meal target</span>
-              <input name="daily_meal_target" type="number" min="0" required className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="daily_meal_target"
+                type="number"
+                min="0"
+                required
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <label className="block sm:col-span-2 lg:col-span-1">
               <span className="label-caps text-muted-foreground">Address</span>
-              <input name="address" className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="address"
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <label className="block">
               <span className="label-caps text-muted-foreground">Latitude</span>
-              <input name="latitude" type="number" step="any" className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="latitude"
+                type="number"
+                step="any"
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <label className="block">
               <span className="label-caps text-muted-foreground">Longitude</span>
-              <input name="longitude" type="number" step="any" className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="longitude"
+                type="number"
+                step="any"
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <div className="sm:col-span-2 lg:col-span-3">
               {error && <p className="mb-3 text-sm text-accent">{error}</p>}
-              <Button type="submit" disabled={saving}>{saving ? t("distribution.saving") : t("distribution.savingCenter")}</Button>
+              <Button type="submit" disabled={saving}>
+                {saving ? t("distribution.saving") : t("distribution.savingCenter")}
+              </Button>
             </div>
           </form>
         </section>
@@ -242,23 +318,43 @@ function DistributionPage() {
           <form onSubmit={logMeal} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <label className="block lg:col-span-2">
               <span className="label-caps text-muted-foreground">Center</span>
-              <select name="center_id" required className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground">
+              <select
+                name="center_id"
+                required
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              >
                 {centers.map((center) => (
-                  <option key={center.id} value={center.id}>{center.name}</option>
+                  <option key={center.id} value={center.id}>
+                    {center.name}
+                  </option>
                 ))}
               </select>
             </label>
             <label className="block">
               <span className="label-caps text-muted-foreground">Meals delivered</span>
-              <input name="meals_cooked" type="number" min="0" required className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="meals_cooked"
+                type="number"
+                min="0"
+                required
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <label className="block">
               <span className="label-caps text-muted-foreground">People served</span>
-              <input name="children_served" type="number" min="0" required className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground" />
+              <input
+                name="children_served"
+                type="number"
+                min="0"
+                required
+                className="mt-2 h-11 w-full border-b border-input bg-transparent text-sm outline-none focus:border-foreground"
+              />
             </label>
             <div className="sm:col-span-2 lg:col-span-4">
               {error && <p className="mb-3 text-sm text-accent">{error}</p>}
-              <Button type="submit" disabled={saving}>{saving ? t("distribution.logging") : t("distribution.logDeliveryBtn")}</Button>
+              <Button type="submit" disabled={saving}>
+                {saving ? t("distribution.logging") : t("distribution.logDeliveryBtn")}
+              </Button>
             </div>
           </form>
         </section>
@@ -268,7 +364,9 @@ function DistributionPage() {
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
           <h2 className="label-caps truncate text-foreground">{t("distribution.map")}</h2>
           <div className="flex shrink-0 items-center gap-3">
-            <span className="text-xs text-muted-foreground">{mapPoints.length} {t("distribution.centersLabel").toLowerCase()}</span>
+            <span className="text-xs text-muted-foreground">
+              {mapPoints.length} {t("distribution.centersLabel").toLowerCase()}
+            </span>
             {locationDenied && (
               <button
                 type="button"
@@ -287,7 +385,9 @@ function DistributionPage() {
       </section>
 
       <section className="px-4 py-6 sm:px-8 lg:px-12">
-        <h2 className="label-caps text-foreground">{t("distribution.centersLabel")} · {centers.length}</h2>
+        <h2 className="label-caps text-foreground">
+          {t("distribution.centersLabel")} · {centers.length}
+        </h2>
         {loading ? (
           <p className="mt-5 text-sm text-muted-foreground">{t("distribution.loading")}</p>
         ) : centers.length === 0 ? (
@@ -298,13 +398,20 @@ function DistributionPage() {
               <article key={center.id} className="bg-background p-5">
                 <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
                   <p className="min-w-0 truncate font-medium">{center.name}</p>
-                  <span className={`label-caps shrink-0 rounded-sm px-2 py-1 ${center.active ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
+                  <span
+                    className={`label-caps shrink-0 rounded-sm px-2 py-1 ${center.active ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}
+                  >
                     {center.active ? t("distribution.active") : t("distribution.inactive")}
                   </span>
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">{center.center_type}</p>
-                <p className="mt-3 text-sm break-words text-muted-foreground">{center.address || t("distribution.noAddress")}</p>
-                <p className="mt-3 text-sm">{t("distribution.target")} {formatCount(center.daily_meal_target)} {t("distribution.mealsPerDay")}</p>
+                <p className="mt-3 text-sm break-words text-muted-foreground">
+                  {center.address || t("distribution.noAddress")}
+                </p>
+                <p className="mt-3 text-sm">
+                  {t("distribution.target")} {formatCount(center.daily_meal_target)}{" "}
+                  {t("distribution.mealsPerDay")}
+                </p>
               </article>
             ))}
           </div>
@@ -315,7 +422,11 @@ function DistributionPage() {
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
           <h2 className="label-caps text-foreground">{t("registration.title")}</h2>
           {!isAdmin && registration && (
-            <Button variant="outline" className="h-9 shrink-0 px-3 text-xs" onClick={() => setShowRegistrationForm((v) => !v)}>
+            <Button
+              variant="outline"
+              className="h-9 shrink-0 px-3 text-xs"
+              onClick={() => setShowRegistrationForm((v) => !v)}
+            >
               {showRegistrationForm ? t("registration.cancel") : t("registration.edit")}
             </Button>
           )}
@@ -325,7 +436,9 @@ function DistributionPage() {
         {!user ? (
           <div className="mt-6 border border-border-strong bg-card p-6">
             <p className="text-sm text-muted-foreground">{t("registration.signInPrompt")}</p>
-            <Button asChild className="mt-4"><Link to="/auth">{t("registration.signIn")}</Link></Button>
+            <Button asChild className="mt-4">
+              <Link to="/auth">{t("registration.signIn")}</Link>
+            </Button>
           </div>
         ) : loadingRegistration ? (
           <p className="mt-6 text-sm text-muted-foreground">{t("registration.loading")}</p>
@@ -336,11 +449,20 @@ function DistributionPage() {
                 <div className="min-w-0">
                   <p className="truncate font-display text-2xl">{registration.organization_name}</p>
                   <div className="mt-3 grid gap-1 text-xs text-muted-foreground sm:grid-cols-2">
-                    <p className="break-words">{t("registration.summary.regId")} · {registration.registration_80g}</p>
-                    <p className="break-words">{t("registration.summary.contact")} · {registration.contact_person} · {registration.contact_phone}</p>
-                    <p className="break-words">{t("registration.summary.pincode")} · {registration.pincode}</p>
                     <p className="break-words">
-                      {registration.area_label ? `${t("registration.summary.area")} · ${registration.area_label}` : t("registration.areaUnverified")}
+                      {t("registration.summary.regId")} · {registration.registration_80g}
+                    </p>
+                    <p className="break-words">
+                      {t("registration.summary.contact")} · {registration.contact_person} ·{" "}
+                      {registration.contact_phone}
+                    </p>
+                    <p className="break-words">
+                      {t("registration.summary.pincode")} · {registration.pincode}
+                    </p>
+                    <p className="break-words">
+                      {registration.area_label
+                        ? `${t("registration.summary.area")} · ${registration.area_label}`
+                        : t("registration.areaUnverified")}
                     </p>
                   </div>
                 </div>
@@ -358,12 +480,42 @@ function DistributionPage() {
             {(showRegistrationForm || !registration) && (
               <form onSubmit={submitRegistration} className="mt-6 grid gap-4 sm:grid-cols-2">
                 {[
-                  { name: "organization_name", labelKey: "registration.field.orgName", value: registration?.organization_name ?? profile?.organization ?? "", required: true },
-                  { name: "registration_80g", labelKey: "registration.field.regId", value: registration?.registration_80g ?? "", required: true },
-                  { name: "contact_person", labelKey: "registration.field.contactPerson", value: registration?.contact_person ?? profile?.full_name ?? "", required: true },
-                  { name: "contact_phone", labelKey: "registration.field.contactPhone", value: registration?.contact_phone ?? profile?.phone ?? "", required: true },
-                  { name: "contact_email", labelKey: "registration.field.contactEmail", value: registration?.contact_email ?? profile?.email ?? "", required: false },
-                  { name: "pincode", labelKey: "registration.field.pincode", value: registration?.pincode ?? "", required: true },
+                  {
+                    name: "organization_name",
+                    labelKey: "registration.field.orgName",
+                    value: registration?.organization_name ?? profile?.organization ?? "",
+                    required: true,
+                  },
+                  {
+                    name: "registration_80g",
+                    labelKey: "registration.field.regId",
+                    value: registration?.registration_80g ?? "",
+                    required: true,
+                  },
+                  {
+                    name: "contact_person",
+                    labelKey: "registration.field.contactPerson",
+                    value: registration?.contact_person ?? profile?.full_name ?? "",
+                    required: true,
+                  },
+                  {
+                    name: "contact_phone",
+                    labelKey: "registration.field.contactPhone",
+                    value: registration?.contact_phone ?? profile?.phone ?? "",
+                    required: true,
+                  },
+                  {
+                    name: "contact_email",
+                    labelKey: "registration.field.contactEmail",
+                    value: registration?.contact_email ?? profile?.email ?? "",
+                    required: false,
+                  },
+                  {
+                    name: "pincode",
+                    labelKey: "registration.field.pincode",
+                    value: registration?.pincode ?? "",
+                    required: true,
+                  },
                 ].map((field) => (
                   <label key={field.name} className="block min-w-0">
                     <span className="label-caps text-muted-foreground">{t(field.labelKey)}</span>
@@ -377,9 +529,15 @@ function DistributionPage() {
                 ))}
                 <div className="sm:col-span-2">
                   <Button type="submit" disabled={savingRegistration}>
-                    {savingRegistration ? t("registration.verifying") : registration ? t("registration.save") : t("registration.submit")}
+                    {savingRegistration
+                      ? t("registration.verifying")
+                      : registration
+                        ? t("registration.save")
+                        : t("registration.submit")}
                   </Button>
-                  {registrationError && <p className="mt-3 text-xs text-accent">{registrationError}</p>}
+                  {registrationError && (
+                    <p className="mt-3 text-xs text-accent">{registrationError}</p>
+                  )}
                 </div>
               </form>
             )}

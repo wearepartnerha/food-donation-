@@ -1,4 +1,4 @@
-import type { AuthUser, Profile } from "@/integrations/mongodb/types";
+import type { AuthUser, Profile } from "@/api/types";
 
 export type DemoRole = "user" | "admin";
 
@@ -55,13 +55,17 @@ export function getDemoRole(): DemoRole | null {
 export function setDemoRole(role: DemoRole) {
   try {
     localStorage.setItem(STORAGE_KEY, role);
-  } catch {}
+  } catch {
+    // Storage blocked (private mode, disabled site data) — demo mode just won't persist.
+  }
 }
 
 export function clearDemoRole() {
   try {
     localStorage.removeItem(STORAGE_KEY);
-  } catch {}
+  } catch {
+    // Storage blocked — nothing stored to clear.
+  }
 }
 
 export function isDemoActive(): boolean {

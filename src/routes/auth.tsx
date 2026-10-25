@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 
+import { apiUrl } from "@/api/client";
 import { Button } from "@/components/ui/button";
 import { setDemoRole } from "@/lib/demo";
 import { DONOR_ROLE, NGO_ROLE } from "@/lib/roles";
@@ -36,8 +37,8 @@ function AuthPage() {
   }
 
   function googleLogin() {
-    // Full-page navigation: the server route redirects on to Google's consent screen.
-    window.location.href = `/api/auth/google?${new URLSearchParams({ role }).toString()}`;
+    // Full-page navigation: the API redirects on to Google's consent screen, then back to this app.
+    window.location.href = apiUrl("/api/auth/google", { role });
   }
 
   return (

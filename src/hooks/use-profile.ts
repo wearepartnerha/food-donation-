@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 
-import type { Profile } from "@/integrations/mongodb/types";
-import { getAccount, updateProfile as updateProfileFn } from "@/lib/account.functions";
+import type { Profile } from "@/api/types";
+import { getAccount, updateProfile as updateProfileFn } from "@/api/account";
 import {
   DEMO_ADMIN,
   DEMO_ADMIN_PROFILE,

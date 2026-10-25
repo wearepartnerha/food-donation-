@@ -2,8 +2,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef } from "react";
 
 import { LIVE_REFRESH_MS } from "@/hooks/use-kitchen";
-import type { NotificationRow } from "@/integrations/mongodb/types";
-import { listNotifications, markNotificationsRead } from "@/lib/account.functions";
+import type { NotificationRow } from "@/api/types";
+import { listNotifications, markNotificationsRead } from "@/api/account";
 import { playNotificationSound } from "@/lib/notification-sound";
 
 export type Notification = NotificationRow;
